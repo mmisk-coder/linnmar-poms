@@ -6,18 +6,33 @@ media_folder: "images"
 public_folder: "/images"
 
 collections:
-  - name: "members"
-    label: "Members"
-    folder: "content/members"
-    create: true
-    slug: "{{name}}"
-    fields:
-      - label: "Name"
-        name: "name"
-        widget: "string"
-      - label: "Role"
-        name: "role"
-        widget: "string"
+ - name: "members"
+  label: "Members"
+  folder: "content/members"
+  create: true
+  slug: "{{name}}"
+  fields:
+    - label: "Name"
+      name: "name"
+      widget: "string"
+
+    - label: "Position"
+      name: "role"
+      widget: "string"
+
+    - label: "Photo"
+      name: "image"
+      widget: "image"
+
+    - label: "Grade"
+      name: "grade"
+      widget: "string"
+      required: false
+
+    - label: "Bio"
+      name: "bio"
+      widget: "text"
+      required: false
 
   - name: "events"
     label: "Events"
@@ -140,13 +155,35 @@ collections:
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Details", name: "body", widget: "markdown" }
 
-  - name: "coaches"
-    label: "Coaches"
-    folder: "content/coaches"
-    create: true
-    slug: "{{name}}"
-    fields:
-      - { label: "Name", name: "name", widget: "string" }
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Photo", name: "photo", widget: "image" }
-      - { label: "Bio", name: "bio", widget: "text" }
+ - name: "coaches"
+  label: "Coaches"
+  folder: "content/coaches"
+  create: true
+  slug: "{{name}}"
+  fields:
+    - label: "Name"
+      name: "name"
+      widget: "string"
+
+    - label: "Team"
+      name: "team"
+      widget: "select"
+      options: ["Varsity", "JV"]
+
+    - label: "Title"
+      name: "role"
+      widget: "string"
+
+    - label: "Photo"
+      name: "image"
+      widget: "image"
+
+    - label: "Bio"
+      name: "bio"
+      widget: "text"
+      required: false
+
+    - label: "Email"
+      name: "email"
+      widget: "string"
+      required: false
