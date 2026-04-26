@@ -12,9 +12,14 @@ async function loadCollection(folder, containerId) {
 
     let varsity = "";
     let jv = "";
+    let count = 0;
 
     for (const file of files) {
       if (!file.name.endsWith(".md")) continue;
+
+      // 🔥 LIMIT HOMEPAGE CONTENT
+      if (containerId === "members" && count >= 6) break;
+      if (containerId === "photos" && count >= 6) break;
 
       const contentRes = await fetch(file.download_url);
       const text = await contentRes.text();
@@ -34,10 +39,11 @@ async function loadCollection(folder, containerId) {
       // 📸 PHOTO GALLERY
       if (containerId === "photos") {
         container.innerHTML += `
-          <div class="gallery-item">
+          <div class="gallery-item fade-up">
             ${image ? `<img src="${image}" alt="photo">` : ""}
           </div>
         `;
+        count++;
         continue;
       }
 
@@ -60,7 +66,7 @@ async function loadCollection(folder, containerId) {
         </div>
       `;
 
-      // 🎯 COACHES: split Varsity / JV (with fallback)
+      // 🎯 COACHES: split Varsity / JV
       if (containerId === "coaches") {
         if (team === "Varsity") {
           varsity += card;
@@ -70,20 +76,21 @@ async function loadCollection(folder, containerId) {
       } else {
         container.innerHTML += card;
       }
+
+      count++;
     }
 
     // Render grouped coaches
     if (containerId === "coaches") {
       container.innerHTML = `
         <h3>Varsity Coaches</h3>
-        <div class="section-grid">${varsity || "<p>No varsity coaches added yet.</p>"}</div>
+        <div class="section-grid">${varsity || "<p>No varsity coaches yet.</p>"}</div>
 
         <h3 style="margin-top:40px;">JV Coaches</h3>
-        <div class="section-grid">${jv || "<p>No JV coaches added yet.</p>"}</div>
+        <div class="section-grid">${jv || "<p>No JV coaches yet.</p>"}</div>
       `;
     }
 
-    // 🔥 Apply animation after content loads
     applyAnimations();
 
   } catch (err) {
@@ -97,7 +104,7 @@ function escapeQuotes(str) {
   return str.replace(/'/g, "\\'").replace(/"/g, '\\"');
 }
 
-// 🎬 MODAL FUNCTIONS
+// 🎬 MODAL
 function openModal(name, bio) {
   document.getElementById("modal-name").innerText = name;
   document.getElementById("modal-bio").innerText = bio;
@@ -108,7 +115,23 @@ function closeModal() {
   document.getElementById("modal").style.display = "none";
 }
 
-// 🔥 SCROLL ANIMATIONS (D1 polish)
+// 📱 HAMBURGER MENU
+function toggleMenu() {
+  const menu = document.getElementById("navMenu");
+  if (menu) menu.classList.toggle("active");
+}
+
+// 🔥 CLOSE MENU ON CLICK
+document.addEventListener("DOMContentLoaded", () => {
+  const links = document.querySelectorAll("#navMenu a");
+  links.forEach(link => {
+    link.addEventListener("click", () => {
+      document.getElementById("navMenu").classList.remove("active");
+    });
+  });
+});
+
+// 🎬 SCROLL ANIMATIONS
 function applyAnimations() {
   const elements = document.querySelectorAll(".fade-up");
 
@@ -123,7 +146,7 @@ function applyAnimations() {
   elements.forEach(el => observer.observe(el));
 }
 
-// LOAD ALL SECTIONS
+// LOAD SECTIONS (only loads what exists on page)
 loadCollection("content/members", "members");
 loadCollection("content/events", "events");
 loadCollection("content/alumni", "alumni");
