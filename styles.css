@@ -306,3 +306,33 @@ body {
     padding: 0;
   }
 }
+
+/* PAGE HERO (for all pages) */
+.page-hero {
+  height: 220px;
+  background: url('https://images.unsplash.com/photo-1521417531039-9b7d5d0b8c3b') center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-hero-overlay {
+  background: rgba(0,0,0,0.6);
+  padding: 20px 30px;
+  border-radius: 8px;
+}
+
+.page-hero h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+@media(min-width:900px){
+  .page-hero {
+    height: 300px;
+  }
+
+  .page-hero h1 {
+    font-size: 42px;
+  }
+}
