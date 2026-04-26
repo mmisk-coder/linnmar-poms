@@ -31,3 +31,20 @@ collections:
       - label: "Date"
         name: "date"
         widget: "string"
+
+  - name: "alumni"
+    label: "Alumni"
+    folder: "content/alumni"
+    create: true
+    slug: "{{name}}"
+    fields:
+      - label: "Name"
+        name: "name"
+        widget: "string"
+      - label: "Grad Year"
+        name: "grad_year"
+        widget: "string"
+      - label: "Notes"
+        name: "notes"
+        widget: "text"
+        required: false
