@@ -88,6 +88,96 @@ body {
   font-size: 18px;
 }
 
+/* NAVBAR */
+.nav {
+  position: sticky;
+  top: 0;
+  background: #000;
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 30px;
+  z-index: 1000;
+  border-bottom: 1px solid #222;
+}
+
+.nav-logo {
+  font-weight: 800;
+  font-size: 20px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* DROPDOWN */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background: #111;
+  padding: 10px;
+  top: 25px;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 5px 10px;
+}
+
+/* HERO UPGRADE */
+.hero-overlay {
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.hero h1 {
+  font-size: 56px;
+  letter-spacing: 1px;
+}
+
+/* SECTION POLISH */
+.section {
+  padding: 80px 20px;
+}
+
+.section h2 {
+  border-left: 4px solid #c8102e;
+  padding-left: 10px;
+}
+
+/* GRID */
+.section-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* ANIMATION */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: 0.6s;
+}
+
+.fade-up.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* IMAGE CARDS (for photos/sponsors later) */
 .card img {
   width: 100%;
