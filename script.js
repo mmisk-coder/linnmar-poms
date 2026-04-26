@@ -1,30 +1,41 @@
 async function loadCollection(folder, containerId) {
   const url = `https://api.github.com/repos/mmisk-coder/linnmar-poms/contents/${folder}`;
   
-  const res = await fetch(url);
-  const files = await res.json();
+  try {
+    const res = await fetch(url);
+    const files = await res.json();
 
-  const container = document.getElementById(containerId);
-  if (!container) return;
+    const container = document.getElementById(containerId);
+    if (!container) return;
 
-  container.innerHTML = "";
+    container.innerHTML = "";
 
-  for (const file of files) {
-    if (file.name.endsWith(".md")) {
-      const contentRes = await fetch(file.download_url);
-      const text = await contentRes.text();
+    for (const file of files) {
+      if (file.name.endsWith(".md")) {
+        const contentRes = await fetch(file.download_url);
+        const text = await contentRes.text();
 
-      const titleMatch = text.match(/title:\s*(.*)/);
-      const nameMatch = text.match(/name:\s*(.*)/);
+        // Extract fields
+        const name = (text.match(/name:\s*(.*)/) || [])[1];
+        const title = (text.match(/title:\s*(.*)/) || [])[1];
+        const role = (text.match(/role:\s*(.*)/) || [])[1];
+        const date = (text.match(/date:\s*(.*)/) || [])[1];
+        const image = (text.match(/image:\s*(.*)/) || [])[1];
 
-      const title = titleMatch ? titleMatch[1] : nameMatch ? nameMatch[1] : "Item";
+        const displayTitle = name || title || "Item";
 
-      container.innerHTML += `
-        <div class="card">
-          <h3>${title}</h3>
-        </div>
-      `;
+        container.innerHTML += `
+          <div class="card">
+            ${image ? `<img src="${image}" alt="${displayTitle}">` : ""}
+            <h3>${displayTitle}</h3>
+            ${role ? `<p>${role}</p>` : ""}
+            ${date ? `<p>${date}</p>` : ""}
+          </div>
+        `;
+      }
     }
+  } catch (err) {
+    console.error("Error loading collection:", folder, err);
   }
 }
 
