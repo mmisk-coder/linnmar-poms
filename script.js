@@ -31,6 +31,15 @@ async function loadCollection(folder, containerId) {
 // LOAD ALL SECTIONS
 loadCollection("content/members", "members");
 loadCollection("content/events", "events");
-loadCollection("content/coaches", "coaches");
 loadCollection("content/alumni", "alumni");
+loadCollection("content/coaches", "coaches");
 loadCollection("content/tryouts", "tryouts");
+loadCollection("content/state", "state");
+loadCollection("content/photos", "photos");
+loadCollection("content/community", "community");
+loadCollection("content/history", "history");
+loadCollection("content/lion-lineage", "lion_lineage");
+loadCollection("content/fundraisers", "fundraisers");
+loadCollection("content/clinics", "clinics");
+loadCollection("content/sponsors", "sponsors");
+loadCollection("content/memorials", "memorials");
