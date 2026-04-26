@@ -35,7 +35,7 @@ async function loadCollection(folder, containerId) {
       if (containerId === "photos") {
         container.innerHTML += `
           <div class="gallery-item">
-            <img src="${image}" alt="photo">
+            ${image ? `<img src="${image}" alt="photo">` : ""}
           </div>
         `;
         continue;
@@ -45,7 +45,7 @@ async function loadCollection(folder, containerId) {
       const isRoster = containerId === "members" || containerId === "coaches";
 
       const card = `
-        <div class="${isRoster ? "roster-card" : "card"}"
+        <div class="${isRoster ? "roster-card" : "card"} fade-up"
              ${bio ? `onclick="openModal('${escapeQuotes(displayTitle)}','${escapeQuotes(bio)}')"` : ""}>
 
           ${image ? `<img src="${image}" alt="${displayTitle}">` : ""}
@@ -60,7 +60,7 @@ async function loadCollection(folder, containerId) {
         </div>
       `;
 
-      // 🎯 COACHES: split Varsity / JV
+      // 🎯 COACHES: split Varsity / JV (with fallback)
       if (containerId === "coaches") {
         if (team === "Varsity") {
           varsity += card;
@@ -76,12 +76,15 @@ async function loadCollection(folder, containerId) {
     if (containerId === "coaches") {
       container.innerHTML = `
         <h3>Varsity Coaches</h3>
-        <div class="section-grid">${varsity}</div>
+        <div class="section-grid">${varsity || "<p>No varsity coaches added yet.</p>"}</div>
 
         <h3 style="margin-top:40px;">JV Coaches</h3>
-        <div class="section-grid">${jv}</div>
+        <div class="section-grid">${jv || "<p>No JV coaches added yet.</p>"}</div>
       `;
     }
+
+    // 🔥 Apply animation after content loads
+    applyAnimations();
 
   } catch (err) {
     console.error("Error loading collection:", folder, err);
@@ -103,6 +106,21 @@ function openModal(name, bio) {
 
 function closeModal() {
   document.getElementById("modal").style.display = "none";
+}
+
+// 🔥 SCROLL ANIMATIONS (D1 polish)
+function applyAnimations() {
+  const elements = document.querySelectorAll(".fade-up");
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+      }
+    });
+  }, { threshold: 0.1 });
+
+  elements.forEach(el => observer.observe(el));
 }
 
 // LOAD ALL SECTIONS
