@@ -5,6 +5,9 @@
 <title>Linn-Mar Poms</title>
 <link rel="stylesheet" href="styles.css">
 <script src="script.js" defer></script>
+
+<!-- Netlify Identity -->
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 
 <body>
@@ -28,6 +31,25 @@
   <h2>Events</h2>
   <div id="events"></div>
 </section>
+
+<!-- 🔥 THIS MUST BE INSIDE BODY -->
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+
+      const hash = window.location.hash;
+
+      if (!user && (hash.includes("invite_token") || hash.includes("recovery_token") || hash.includes("confirmation_token"))) {
+        window.netlifyIdentity.open();
+      }
+
+      window.netlifyIdentity.on("login", () => {
+        document.location.href = "/admin/";
+      });
+
+    });
+  }
+</script>
 
 </body>
 </html>
