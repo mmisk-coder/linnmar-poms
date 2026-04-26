@@ -256,3 +256,53 @@ body {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* HAMBURGER */
+.hamburger {
+  display: block;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* MOBILE MENU (hidden by default) */
+.nav-links {
+  display: none;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  width: 100%;
+  background: #000;
+  flex-direction: column;
+  text-align: center;
+  padding: 15px 0;
+}
+
+.nav-links a {
+  padding: 12px 0;
+  display: block;
+}
+
+/* ACTIVE MENU */
+.nav-links.active {
+  display: flex;
+}
+
+/* DESKTOP */
+@media(min-width:900px){
+  .hamburger {
+    display: none;
+  }
+
+  .nav-links {
+    display: flex !important;
+    position: static;
+    flex-direction: row;
+    gap: 25px;
+    background: none;
+    padding: 0;
+  }
+
+  .nav-links a {
+    padding: 0;
+  }
+}
