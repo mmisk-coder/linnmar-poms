@@ -16,11 +16,19 @@
   <script>
     if (window.netlifyIdentity) {
       window.netlifyIdentity.on("init", user => {
+
+        // Handle login redirect
         if (!user) {
           window.netlifyIdentity.on("login", () => {
             document.location.href = "/admin/";
           });
         }
+
+        // 🔥 Handle password reset token
+        if (!user && window.location.hash.includes("recovery_token")) {
+          window.netlifyIdentity.open("recovery");
+        }
+
       });
     }
   </script>
