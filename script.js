@@ -10,33 +10,99 @@ async function loadCollection(folder, containerId) {
 
     container.innerHTML = "";
 
+    let varsity = "";
+    let jv = "";
+
     for (const file of files) {
-      if (file.name.endsWith(".md")) {
-        const contentRes = await fetch(file.download_url);
-        const text = await contentRes.text();
+      if (!file.name.endsWith(".md")) continue;
 
-        // Extract fields
-        const name = (text.match(/name:\s*(.*)/) || [])[1];
-        const title = (text.match(/title:\s*(.*)/) || [])[1];
-        const role = (text.match(/role:\s*(.*)/) || [])[1];
-        const date = (text.match(/date:\s*(.*)/) || [])[1];
-        const image = (text.match(/image:\s*(.*)/) || [])[1];
+      const contentRes = await fetch(file.download_url);
+      const text = await contentRes.text();
 
-        const displayTitle = name || title || "Item";
+      // Extract fields
+      const name = (text.match(/name:\s*(.*)/) || [])[1];
+      const title = (text.match(/title:\s*(.*)/) || [])[1];
+      const role = (text.match(/role:\s*(.*)/) || [])[1];
+      const date = (text.match(/date:\s*(.*)/) || [])[1];
+      const image = (text.match(/image:\s*(.*)/) || [])[1];
+      const email = (text.match(/email:\s*(.*)/) || [])[1];
+      const bio = (text.match(/bio:\s*(.*)/) || [])[1];
+      const team = (text.match(/team:\s*(.*)/) || [])[1];
 
+      const displayTitle = name || title || "Item";
+
+      // 📸 PHOTO GALLERY
+      if (containerId === "photos") {
         container.innerHTML += `
-          <div class="card">
-            ${image ? `<img src="${image}" alt="${displayTitle}">` : ""}
-            <h3>${displayTitle}</h3>
-            ${role ? `<p>${role}</p>` : ""}
-            ${date ? `<p>${date}</p>` : ""}
+          <div class="gallery-item">
+            <img src="${image}" alt="photo">
           </div>
         `;
+        continue;
+      }
+
+      // 👥 ROSTER STYLE (members + coaches)
+      const isRoster = containerId === "members" || containerId === "coaches";
+
+      const card = `
+        <div class="${isRoster ? "roster-card" : "card"}"
+             ${bio ? `onclick="openModal('${escapeQuotes(displayTitle)}','${escapeQuotes(bio)}')"` : ""}>
+
+          ${image ? `<img src="${image}" alt="${displayTitle}">` : ""}
+
+          <h3>${displayTitle}</h3>
+
+          ${role ? `<p>${role}</p>` : ""}
+          ${date ? `<p>${date}</p>` : ""}
+
+          ${email ? `<a href="mailto:${email}" class="email-btn" onclick="event.stopPropagation()">Email</a>` : ""}
+
+        </div>
+      `;
+
+      // 🎯 COACHES: split Varsity / JV
+      if (containerId === "coaches") {
+        if (team === "Varsity") {
+          varsity += card;
+        } else {
+          jv += card;
+        }
+      } else {
+        container.innerHTML += card;
       }
     }
+
+    // Render grouped coaches
+    if (containerId === "coaches") {
+      container.innerHTML = `
+        <h3>Varsity Coaches</h3>
+        <div class="section-grid">${varsity}</div>
+
+        <h3 style="margin-top:40px;">JV Coaches</h3>
+        <div class="section-grid">${jv}</div>
+      `;
+    }
+
   } catch (err) {
     console.error("Error loading collection:", folder, err);
   }
+}
+
+// 🧠 Prevent broken quotes in modal
+function escapeQuotes(str) {
+  if (!str) return "";
+  return str.replace(/'/g, "\\'").replace(/"/g, '\\"');
+}
+
+// 🎬 MODAL FUNCTIONS
+function openModal(name, bio) {
+  document.getElementById("modal-name").innerText = name;
+  document.getElementById("modal-bio").innerText = bio;
+  document.getElementById("modal").style.display = "flex";
+}
+
+function closeModal() {
+  document.getElementById("modal").style.display = "none";
 }
 
 // LOAD ALL SECTIONS
