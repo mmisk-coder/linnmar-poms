@@ -6,31 +6,28 @@ media_folder: "images"
 public_folder: "/images"
 
 collections:
-
   - name: "members"
     label: "Members"
-    files:
-      - file: "content/members.json"
-        label: "Members"
-        name: "members"
-        fields:
-          - label: "Members"
-            name: "members"
-            widget: "list"
-            fields:
-              - { label: "Name", name: "name", widget: "string" }
-              - { label: "Role", name: "role", widget: "string" }
+    folder: "content/members"
+    create: true
+    slug: "{{name}}"
+    fields:
+      - label: "Name"
+        name: "name"
+        widget: "string"
+      - label: "Role"
+        name: "role"
+        widget: "string"
 
   - name: "events"
     label: "Events"
-    files:
-      - file: "content/events.json"
-        label: "Events"
-        name: "events"
-        fields:
-          - label: "Events"
-            name: "events"
-            widget: "list"
-            fields:
-              - { label: "Title", name: "title", widget: "string" }
-              - { label: "Date", name: "date", widget: "string" }
+    folder: "content/events"
+    create: true
+    slug: "{{title}}"
+    fields:
+      - label: "Title"
+        name: "title"
+        widget: "string"
+      - label: "Date"
+        name: "date"
+        widget: "string"
