@@ -6,9 +6,6 @@
 
 <link rel="stylesheet" href="styles.css">
 <script src="script.js" defer></script>
-
-<!-- Netlify Identity -->
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 
 <body>
@@ -17,15 +14,14 @@
 <header class="nav">
   <div class="nav-logo">LM Poms</div>
 
-  <!-- HAMBURGER -->
   <div class="hamburger" onclick="toggleMenu()">☰</div>
 
   <nav class="nav-links" id="navMenu">
-    <a href="/">Home</a>
-    <a href="/members.html">Team</a>
-    <a href="/coaches.html">Coaches</a>
-    <a href="/tryouts.html">Tryouts</a>
-    <a href="/photos.html">Photos</a>
+    <a href="index.html">Home</a>
+    <a href="members.html">Team</a>
+    <a href="coaches.html">Coaches</a>
+    <a href="tryouts.html">Tryouts</a>
+    <a href="photos.html">Photos</a>
   </nav>
 </header>
 
@@ -36,7 +32,7 @@
   <div class="hero-overlay">
     <h1>Linn-Mar Poms</h1>
     <p>Elite Performance • Championship Culture</p>
-    <a href="/tryouts.html" class="btn">Tryout Info</a>
+    <a href="tryouts.html" class="btn">Tryout Info</a>
   </div>
 </section>
 
@@ -73,7 +69,7 @@
   <div id="members" class="section-grid"></div>
 
   <div style="text-align:center; margin-top:20px;">
-    <a href="/members.html" class="btn">View Full Team</a>
+    <a href="members.html" class="btn">View Full Team</a>
   </div>
 </section>
 
@@ -89,7 +85,7 @@
   <div id="photos"></div>
 
   <div style="text-align:center; margin-top:20px;">
-    <a href="/photos.html" class="btn">View Gallery</a>
+    <a href="photos.html" class="btn">View Gallery</a>
   </div>
 </section>
 
@@ -97,7 +93,7 @@
 <section class="cta">
   <h2>Join Linn-Mar Poms</h2>
   <p>Be part of a program built on excellence and performance.</p>
-  <a href="/tryouts.html" class="btn">View Tryouts</a>
+  <a href="tryouts.html" class="btn">View Tryouts</a>
 </section>
 
 <!-- MODAL -->
@@ -108,25 +104,6 @@
     <div class="modal-close" onclick="closeModal()">Close</div>
   </div>
 </div>
-
-<!-- NETLIFY IDENTITY -->
-<script>
-  if (window.netlifyIdentity) {
-    window.netlifyIdentity.on("init", user => {
-
-      const hash = window.location.hash;
-
-      if (!user && (hash.includes("invite_token") || hash.includes("recovery_token") || hash.includes("confirmation_token"))) {
-        window.netlifyIdentity.open();
-      }
-
-      window.netlifyIdentity.on("login", () => {
-        document.location.href = "/admin/";
-      });
-
-    });
-  }
-</script>
 
 </body>
 </html>
