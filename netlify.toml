@@ -1,1 +1,3 @@
-
+[build]
+  command = "node netlify/functions/build-json.js"
+  publish = "."
