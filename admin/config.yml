@@ -1,6 +1,8 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: mmisk-coder/linnmar-poms
   branch: main
+  client_id: Ov23lioX8sOnP35i8MGH
 
 media_folder: "images"
 public_folder: "/images"
@@ -41,34 +43,6 @@ collections:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Date", name: "date", widget: "string" }
 
-  - name: "alumni"
-    label: "Alumni"
-    folder: "content/alumni"
-    create: true
-    slug: "{{name}}"
-    fields:
-      - { label: "Name", name: "name", widget: "string" }
-      - { label: "Grad Year", name: "grad_year", widget: "string" }
-      - { label: "Notes", name: "notes", widget: "text", required: false }
-
-  - name: "tryouts"
-    label: "Tryouts"
-    folder: "content/tryouts"
-    create: true
-    slug: "{{title}}"
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Details", name: "body", widget: "markdown" }
-
-  - name: "state"
-    label: "State"
-    folder: "content/state"
-    create: true
-    slug: "{{title}}"
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Details", name: "body", widget: "markdown" }
-
   - name: "photos"
     label: "Photos"
     folder: "content/photos"
@@ -77,67 +51,3 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Image", name: "image", widget: "image" }
-
-  - name: "community"
-    label: "Community"
-    folder: "content/community"
-    create: true
-    slug: "{{title}}"
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Details", name: "body", widget: "markdown" }
-
-  - name: "history"
-    label: "History"
-    folder: "content/history"
-    create: true
-    slug: "{{title}}"
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Details", name: "body", widget: "markdown" }
-
-  - name: "lion_lineage"
-    label: "Lion Lineage Competition"
-    folder: "content/lion-lineage"
-    create: true
-    slug: "{{title}}"
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Details", name: "body", widget: "markdown" }
-
-  - name: "fundraisers"
-    label: "Fundraisers & Donations"
-    folder: "content/fundraisers"
-    create: true
-    slug: "{{title}}"
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Details", name: "body", widget: "markdown" }
-
-  - name: "clinics"
-    label: "Clinics"
-    folder: "content/clinics"
-    create: true
-    slug: "{{title}}"
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Details", name: "body", widget: "markdown" }
-
-  - name: "sponsors"
-    label: "Sponsors"
-    folder: "content/sponsors"
-    create: true
-    slug: "{{name}}"
-    fields:
-      - { label: "Name", name: "name", widget: "string" }
-      - { label: "Logo", name: "logo", widget: "image" }
-      - { label: "Website", name: "link", widget: "string", required: false }
-
-  - name: "memorials"
-    label: "Memorials"
-    folder: "content/memorials"
-    create: true
-    slug: "{{name}}"
-    fields:
-      - { label: "Name", name: "name", widget: "string" }
-      - { label: "Details", name: "body", widget: "markdown" }
