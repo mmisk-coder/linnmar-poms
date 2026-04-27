@@ -290,10 +290,10 @@ body {
     font-size: 26px;
   }
 
-  /* 🔥 THIS IS THE FIX */
+  /* 🔥 SMARTER MOBILE CROP (LESS BLACK SPACE) */
   .hero-img {
-    object-fit: contain;
-    background: black;
+    object-fit: cover;
+    object-position: center 20%;
   }
 
   .section-grid {
