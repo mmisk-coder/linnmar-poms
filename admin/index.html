@@ -8,8 +8,19 @@
 
 <body>
 
-  <!-- Decap CMS (GitHub backend) -->
+  <script>
+    window.CMS_MANUAL_INIT = true;
+  </script>
+
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
+  <script>
+    fetch("config.yml")
+      .then(res => res.text())
+      .then(yaml => {
+        CMS.init({ config: yaml });
+      });
+  </script>
 
 </body>
 </html>
