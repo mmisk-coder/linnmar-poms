@@ -1,0 +1,18 @@
+[
+  {
+    "name": "Coach Johnson",
+    "role": "Head Coach",
+    "team": "Varsity",
+    "image": "/images/coach1.jpg",
+    "bio": "Leading the program with 10+ years of experience.",
+    "email": "coach1@email.com"
+  },
+  {
+    "name": "Coach Lee",
+    "role": "Assistant Coach",
+    "team": "JV",
+    "image": "/images/coach2.jpg",
+    "bio": "Focuses on technique and choreography.",
+    "email": "coach2@email.com"
+  }
+]
