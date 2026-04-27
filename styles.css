@@ -283,7 +283,7 @@ body {
     border-top: 1px solid #222;
   }
 
-  /* 🔥 KEY FIX */
+  /* KEY FIX */
   .hero {
     height: auto;
   }
@@ -305,8 +305,37 @@ body {
   .section-grid {
     grid-template-columns: 1fr;
   }
-
+  
   .roster-card img {
     height: 220px;
   }
+  
+  /* =========================
+   MOBILE (default styles already apply)
+   Keep your base CSS as mobile-first
+========================= */
+
+/* =========================
+   SMALL PHONES (optional tweak)
+========================= */
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 22px;
+  }
+}
+
+/* =========================
+   TABLET
+========================= */
+@media (min-width: 768px) {
+
+  .section-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero h1 {
+    font-size: 36px;
+  }
+
+
 }
