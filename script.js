@@ -1,6 +1,5 @@
 const BASE = "/linnmar-poms";
 
-// 🔥 LOAD LOCAL FILES INSTEAD OF GITHUB API
 async function loadCollection(folder, containerId) {
   try {
     const container = document.getElementById(containerId);
@@ -18,7 +17,7 @@ async function loadCollection(folder, containerId) {
       const name = item.name || item.title || "Item";
       const role = item.role || "";
       const date = item.date || "";
-      const image = item.image || "";
+      const image = item.image ? `${BASE}${item.image}` : "";
       const email = item.email || "";
       const bio = item.bio || "";
       const team = item.team || "";
@@ -26,7 +25,7 @@ async function loadCollection(folder, containerId) {
       // 📸 PHOTO GALLERY
       if (containerId === "photos") {
         container.innerHTML += `
-          <div class="gallery-item">
+          <div class="gallery-item fade-up">
             ${image ? `<img src="${image}" alt="photo">` : ""}
           </div>
         `;
@@ -60,6 +59,7 @@ async function loadCollection(folder, containerId) {
       }
     });
 
+    // Coaches split
     if (containerId === "coaches") {
       container.innerHTML = `
         <h3>Varsity Coaches</h3>
