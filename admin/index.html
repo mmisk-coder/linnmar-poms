@@ -3,35 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Content Manager</title>
-
-  <!-- Netlify Identity -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <title>Linn-Mar Poms CMS</title>
 </head>
+
 <body>
 
-  <!-- Decap CMS -->
+  <!-- Decap CMS (GitHub backend) -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-
-  <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
-
-        // Handle login redirect
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
-          });
-        }
-
-        // 🔥 Handle password reset token
-        if (!user && window.location.hash.includes("recovery_token")) {
-          window.netlifyIdentity.open("recovery");
-        }
-
-      });
-    }
-  </script>
 
 </body>
 </html>
