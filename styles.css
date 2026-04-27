@@ -393,6 +393,51 @@ body {
   font-size: 28px;
 }
 
+/* =========================
+   📸 LIGHTBOX (FULLSCREEN)
+========================= */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.95);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+}
+
+/* =========================
+   📸 GALLERY IMPROVEMENT
+========================= */
+.gallery-item img {
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.gallery-item img:hover {
+  transform: scale(1.03);
+}
+
+/* =========================
+   📱 MOBILE NAV FIX
+========================= */
+.nav-links.show {
+  display: flex;
+}
+
+/* =========================
+   🎯 SMALL POLISH
+========================= */
+.roster-card img {
+  transition: 0.4s;
+}
+
 @media(min-width:900px){
   .page-hero {
     height: 300px;
