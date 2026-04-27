@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Jane Doe",
+    "role": "Captain",
+    "grade": "Senior",
+    "image": "/images/jane.jpg",
+    "bio": "Team captain and four-year varsity member."
+  },
+  {
+    "name": "Emily Smith",
+    "role": "Dancer",
+    "grade": "Junior",
+    "image": "/images/emily.jpg",
+    "bio": "Specializes in jazz and hip hop."
+  }
+]
