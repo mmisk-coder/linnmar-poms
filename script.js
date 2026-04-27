@@ -22,11 +22,11 @@ async function loadCollection(folder, containerId) {
       const bio = item.bio || "";
       const team = item.team || "";
 
-      // 📸 PHOTO GALLERY
+      // 📸 PHOTO GALLERY (LIGHTBOX ENABLED)
       if (containerId === "photos") {
         container.innerHTML += `
           <div class="gallery-item fade-up">
-            ${image ? `<img src="${image}" alt="photo">` : ""}
+            ${image ? `<img src="${image}" onclick="openLightbox('${image}')" alt="photo">` : ""}
           </div>
         `;
         return;
@@ -76,3 +76,65 @@ async function loadCollection(folder, containerId) {
     console.error("Static load error:", folder, err);
   }
 }
+
+//
+// 🔥 LIGHTBOX FUNCTIONS
+//
+function openLightbox(src) {
+  document.getElementById("lightbox-img").src = src;
+  document.getElementById("lightbox").style.display = "flex";
+}
+
+function closeLightbox() {
+  document.getElementById("lightbox").style.display = "none";
+}
+
+//
+// 🔥 MOBILE NAV
+//
+function toggleMenu() {
+  document.getElementById("navMenu").classList.toggle("show");
+}
+
+//
+// 🔥 MODAL FUNCTIONS (coach bio)
+//
+function openModal(name, bio) {
+  document.getElementById("modal-name").innerText = name;
+  document.getElementById("modal-bio").innerText = bio;
+  document.getElementById("modal").style.display = "flex";
+}
+
+function closeModal() {
+  document.getElementById("modal").style.display = "none";
+}
+
+//
+// 🔥 ANIMATIONS
+//
+function applyAnimations() {
+  const elements = document.querySelectorAll(".fade-up");
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+      }
+    });
+  });
+
+  elements.forEach(el => observer.observe(el));
+}
+
+//
+// 🔥 LOAD DATA (AUTO LOAD BASED ON PAGE)
+//
+document.addEventListener("DOMContentLoaded", () => {
+  loadCollection("content/members", "members");
+  loadCollection("content/coaches", "coaches");
+  loadCollection("content/photos", "photos");
+  loadCollection("content/events", "events");
+  loadCollection("content/tryouts", "tryouts");
+  loadCollection("content/state", "state");
+  loadCollection("content/community", "community");
+});
