@@ -1,11 +1,12 @@
+const BASE = "/linnmar-poms";
+
 // 🔥 LOAD LOCAL FILES INSTEAD OF GITHUB API
 async function loadCollection(folder, containerId) {
   try {
     const container = document.getElementById(containerId);
     if (!container) return;
 
-    // 👇 IMPORTANT: load from local index.json (we'll create this next)
-    const res = await fetch(`/${folder}/index.json`);
+    const res = await fetch(`${BASE}/${folder}/index.json`);
     const items = await res.json();
 
     container.innerHTML = "";
@@ -75,39 +76,3 @@ async function loadCollection(folder, containerId) {
     console.error("Static load error:", folder, err);
   }
 }
-
-// HELPERS
-function escapeQuotes(str) {
-  if (!str) return "";
-  return str.replace(/'/g, "\\'").replace(/"/g, '\\"');
-}
-
-function openModal(name, bio) {
-  document.getElementById("modal-name").innerText = name;
-  document.getElementById("modal-bio").innerText = bio;
-  document.getElementById("modal").style.display = "flex";
-}
-
-function closeModal() {
-  document.getElementById("modal").style.display = "none";
-}
-
-function applyAnimations() {
-  const elements = document.querySelectorAll(".fade-up");
-
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("show");
-      }
-    });
-  });
-
-  elements.forEach(el => observer.observe(el));
-}
-
-// LOAD DATA
-loadCollection("content/members", "members");
-loadCollection("content/coaches", "coaches");
-loadCollection("content/photos", "photos");
-loadCollection("content/events", "events");
